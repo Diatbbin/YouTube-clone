@@ -28,6 +28,8 @@ app.post('/process-video', async (req, res) => {
     const inputFileName = data.name;
     const outputFileName = `processed-${inputFileName}`;
 
+    await setUpDirectories();
+    
     // Download raw vid from cloud storage
     await downloadRawVideo(inputFileName)
 

@@ -6,11 +6,11 @@ import { dir } from 'console';
 
 const storage = new Storage();
 
-const rawVideoBucketName = "raw-videos"
-const processedVideoBucketName = "processed-videos"
+const rawVideoBucketName = "raw-videos-db"
+const processedVideoBucketName = "processed-videos-db"
 
-const localRawVideoPath = "./raw-vdeos"
-const localProcessedVideoPath = "./processed-videos"
+const localRawVideoPath = "./raw-vdeos-db"
+const localProcessedVideoPath = "./processed-videos-db"
 
 /**
  * Create local dir for raw and process vid
@@ -119,7 +119,7 @@ export function deleteRawVideo(filename: string) {
 function deleteFile(filePath: string): Promise<void> {
     return new Promise((resolve, reject) => {
         // if the file doesnt exist
-        if (!fs.existsSync(filePath)) {
+        if (fs.existsSync(filePath)) {
             fs.unlink(filePath, (err)=> {
                 if(err) {
                     console.log(`Failed to delete file at ${filePath}`, err);
