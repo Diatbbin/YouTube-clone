@@ -8,7 +8,7 @@ Hosted on google cloud
 - List videos  
 - Watch a video  
 - Sign in/out  
-- Upload a video  
+- Upload a video (Only for logged in users)
 - Watch the transcoded video  
 
 # Tech Stack
