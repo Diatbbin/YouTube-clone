@@ -1,11 +1,11 @@
-'use-client';
-
 import { Fragment } from "react";
+import { useRouter } from "next/navigation";
 import { uploadVideo } from "../firebase/function";
 
 import styles from './upload.module.css';
 
 export default function Upload() {
+    const router = useRouter();
     const handlerFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.item(0);
 
@@ -18,6 +18,7 @@ export default function Upload() {
         try {
             const response = await uploadVideo(file);
             alert(`File uploaded successfully. Response: ${JSON.stringify(response)}`);
+            router.refresh();
         } catch (error) {
             alert(`Failed to upload file: ${error}`);
         }
