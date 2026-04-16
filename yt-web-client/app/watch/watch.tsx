@@ -5,7 +5,10 @@ import { useSearchParams } from 'next/navigation'
 
 export default function Watch() {
     const videoPrefix = 'https://storage.googleapis.com/processed-videos-db/';
-    const videoSrc = useSearchParams().get('v');
+    const searchParams = useSearchParams();
+    const videoSrc = searchParams.get('v');
+    const title = searchParams.get('title')
+    const description = searchParams.get('description')
     const selectedVideo = videoPrefix + videoSrc
 
     return (
@@ -18,6 +21,8 @@ export default function Watch() {
 
               <section className={styles.playerSection}>
                   <h2 className={styles.playerTitle}>Now playing</h2>
+                  <h3 className={styles.videoTitle}>{title}</h3>
+                  <p className={styles.videoDescription}>{description}</p>
              
                   {selectedVideo && <video className={styles.videoPlayer} controls src={selectedVideo} />}
               </section>

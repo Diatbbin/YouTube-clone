@@ -31,12 +31,23 @@
     border-radius: 20px;
 }
 
-
 .playerTitle {
     margin-bottom: 16px;
     margin-top: 0;
     font-size: 24px;
     color: #111111;
+}
+
+.videoTitle {
+    margin: 0;
+    font-size: 20px;
+    color: #111111;
+}
+
+.videoDescription {
+    margin: 8px 0 16px;
+    color: #4a4a4a;
+    line-height: 1.5;
 }
 
 .videoPlayer {

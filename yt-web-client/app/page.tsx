@@ -27,7 +27,15 @@ export default async function Home() {
                 {videos.length > 0 && (
                     <div className={styles.videoList}>
                         {videos.map((video) => (
-                            <Link key={video.id} href={`/watch?v=${video.filename}`} className={styles.videoCard}>
+                            <Link
+                                key={video.id}
+                                href={`/watch?${new URLSearchParams({
+                                    v: video.filename ?? '',
+                                    title: video.title ?? '',
+                                    description: video.description ?? '',
+                                }).toString()}`}
+                                className={styles.videoCard}
+                            >
                                 <Image
                                     src={'/thumbnail.png'}
                                     alt={video.title ?? 'video thumbnail'}
