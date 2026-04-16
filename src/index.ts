@@ -24,14 +24,16 @@ app.post('/process-video', async (req, res) => {
     } catch (error) {
         console.error(error)
         res.status(400).send('Bad request: missing filename')
+        return 
     }
 
     const inputFileName = data.name;
     const outputFileName = `processed-${inputFileName}`;
     const videoId = inputFileName.split('.')[0];
 
-    if (!isVideoNew(videoId)) {
+    if (!await isVideoNew(videoId)) {
         res.status(400).send('Bad request: video already processing or processed');
+        return 
     } else {
         await setVideo(videoId, {
             id: videoId,
@@ -54,6 +56,7 @@ app.post('/process-video', async (req, res) => {
             deleteProcessedVideo(outputFileName)
         ])
         res.status(500).send('Processing failed')
+        return 
     }
 
     // Uplaod the processed video to cloud storage
