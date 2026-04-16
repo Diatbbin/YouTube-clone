@@ -12,7 +12,7 @@ export default async function Home() {
     return (
         <main className={styles.page}>
             <section className={styles.headerSection}>
-                <h1 className={styles.heading}>Lastest uploads</h1>
+                <h1 className={styles.heading}>Latest uploads</h1>
                 <p className={styles.subheading}>
                     Browse newly uploaded videos and jump straight into the ones you want to watch.
                 </p>
