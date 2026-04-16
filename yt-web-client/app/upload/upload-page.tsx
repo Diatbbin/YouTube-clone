@@ -13,13 +13,11 @@ export default function UploadPage() {
     const [description, setDescription] = useState("")
     const [isUploading, setIsUploading] = useState(false);
 
-    const handleUpload = async (thumbnailFile: File, videoFile: File) => {
+    const handleUpload = async (videoFile: File) => {
         setIsUploading(true);
 
         try {
-            await uploadVideo(thumbnailFile);
-            //await uploadThumbnail(videoFile);
-
+            await uploadVideo(videoFile);
             alert("File uploaded successfully");
             router.refresh();
         } catch (error) {
@@ -52,7 +50,7 @@ export default function UploadPage() {
             return;
         }
 
-        await handleUpload(thumbnailFile, videoFile);
+        await handleUpload(videoFile);
     }
 
     return (
@@ -106,7 +104,7 @@ export default function UploadPage() {
                         type="file"
                         accept=".mov, video/quicktime, video/*"
                         onChange={(e) => setVideoFile(e.target.files?.item(0) ?? null)}
-                        placeholder="Upload thumbnail image"
+                        placeholder="Upload video file"
                         required
                     />
 
