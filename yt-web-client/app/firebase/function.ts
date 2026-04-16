@@ -13,30 +13,32 @@ export interface Video {
     description?: string  
   }
 
-async function uploadFileWithSignedUrl(file: File) {
+async function uploadFileWithSignedUrl(videofile: File, title: string, description: string) {
     const response: any = await generateUploadUrl({
-        fileExtension: file.name.split('.').pop()
+        fileExtension: videofile.name.split('.').pop(),
+        title: title,
+        description: description,
     });
 
     // Upload the file via the signed url 
     const uploadResult = await fetch(response?.data?.url, {
         method: 'PUT',
-        body: file,
+        body: videofile,
         headers: {
-            'Content-Type': file.type,
+            'Content-Type': videofile.type,
         },
     });
 
     if (!uploadResult.ok) {
-        throw new Error(`Failed to upload file: ${file.name}. Status code: ${uploadResult.status}`);
+        throw new Error(`Failed to upload file: ${videofile.name}. Status code: ${uploadResult.status}`);
     }
 
     return uploadResult;
 }
 
-export async function uploadVideo(file: File) {
+export async function uploadVideo(videoFile: File, title: string, description: string) {
     try {
-        return uploadFileWithSignedUrl(file);
+        return uploadFileWithSignedUrl(videoFile, title, description);
     } catch (error) {
         throw new Error(`Failed to upload video: ${error}`);
     }

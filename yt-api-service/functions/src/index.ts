@@ -20,7 +20,7 @@ export interface Video {
   filename?: string,
   status?: "processing" | "processed",
   title?: string,
-  description?: string
+  description?: string,
 }
 
 export const createUser = functions.auth.user().onCreate((user) => {
@@ -45,9 +45,19 @@ export const generateUploadUrl = onCall({maxInstances: 1}, async (request) => {
 
   const auth = request.auth;
   const data = request.data;
+  const title = String(data.title);
+  const desc = String(data.description);
   const bucket = storage.bucket(rawVideoBucketName);
 
   const fileName = `${auth.uid}-${Date.now()}.${data.fileExtension}`;
+  const videoId = fileName.split(".")[0];
+
+  await firestore.collection(videoCollectionId).doc(videoId).set({
+    id: videoId,
+    uid: auth.uid,
+    title: title,
+    description: desc,
+  }, {merge: true});
 
   const [url] = await bucket.file(fileName).getSignedUrl({
     version: "v4",
