@@ -1,0 +1,46 @@
+.watchPage {
+    padding: 24px;
+}
+
+.headerSection {
+    max-width: 900px;
+    margin: 0 auto 24px;
+    padding: 32px;
+    border-radius: 20px;
+    background: #c93131;
+    color: #ffffff;
+}
+
+.heading {
+    margin: 0;
+    font-size: clamp(32px, 40px, 48px);
+    line-height: 1.05;
+}
+
+.subheading {
+    margin: 12px 0 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.playerSection {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 20px;
+}
+
+
+.playerTitle {
+    margin-bottom: 16px;
+    margin-top: 0;
+    font-size: 24px;
+    color: #111111;
+}
+
+.videoPlayer {
+    width: 100%;
+    border-radius: 16px;
+    background: #000000;
+}
