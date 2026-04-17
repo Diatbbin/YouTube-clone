@@ -4,6 +4,7 @@ import {Firestore} from "firebase-admin/firestore";
 import * as logger from "firebase-functions/logger";
 import {Storage} from "@google-cloud/storage";
 import {onCall} from "firebase-functions/https";
+import {Video} from "../../../shared/video";
 
 initializeApp();
 
@@ -14,15 +15,6 @@ const rawVideoBucketName = "raw-videos-db";
 const thumbnailBucketName = "thumbnails-db";
 
 const videoCollectionId = "videos";
-
-export interface Video {
-  id?: string,
-  uid?: string,
-  filename?: string,
-  status?: "processing" | "processed",
-  title?: string,
-  description?: string,
-}
 
 export const createUser = functions.auth.user().onCreate((user) => {
   const userInfo = {
