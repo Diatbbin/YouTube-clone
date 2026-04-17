@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
+const thumbnailPrefix = "https://storage.googleapis.com/thumbnails-db/"
 
 export default async function Home() {
     const videos = await getVideos();
@@ -37,7 +38,7 @@ export default async function Home() {
                                 className={styles.videoCard}
                             >
                                 <Image
-                                    src={'/thumbnail.png'}
+                                    src={thumbnailPrefix + video.thumbnailFilename}
                                     alt={video.title ?? 'video thumbnail'}
                                     width={200}
                                     height={120}

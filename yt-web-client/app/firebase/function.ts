@@ -3,15 +3,15 @@ import { functions } from './firebase';
 
 const generateUploadUrl = httpsCallable(functions, 'generateUploadUrl');
 const getVideosFunction = httpsCallable(functions, 'getVideos');
-const getThumbnailsFunction = httpsCallable(functions, 'getThumbnails');
 
 export interface Video {
-    id?: string,
-    uid?: string,
-    filename?: string,
-    status?: 'processing' | 'processed',
-    title?: string,
-    description?: string  
+    id?: string;
+    uid?: string;
+    filename?: string;
+    status?: "processing" | "processed";
+    title?: string;
+    description?: string;
+    thumbnailFilename?: string;
   }
 
 async function uploadFileWithSignedUrl(videofile: File, thumbnailFile: File, title: string, description: string) {
@@ -59,6 +59,6 @@ export async function uploadVideo(videoFile: File, thumbnailFile: File, title: s
 }
 
 export async function getVideos() {
-  const response: any = await getVideosFunction();
-  return (response.data as Video[]) ?? [];
+  const response = await getVideosFunction();
+  return response.data as Video[] ?? []
 }
