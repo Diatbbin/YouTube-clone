@@ -62,6 +62,7 @@ export const generateUploadUrl = onCall({maxInstances: 1}, async (request) => {
     uid: auth.uid,
     title: title,
     description: desc,
+    thumbnailFilename: thumbnailFileName,
   }, {merge: true});
 
   const [url] = await videoBucket.file(fileName).getSignedUrl({
