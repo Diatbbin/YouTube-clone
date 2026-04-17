@@ -13,11 +13,11 @@ export default function UploadPage() {
     const [description, setDescription] = useState("")
     const [isUploading, setIsUploading] = useState(false);
 
-    const handleUpload = async (videoFile: File, title: string, description: string) => {
+    const handleUpload = async (videoFile: File, thumbnailFile: File, title: string, description: string) => {
         setIsUploading(true);
 
         try {
-            await uploadVideo(videoFile, title, description);
+            await uploadVideo(videoFile,thumbnailFile, title, description);
             alert("File uploaded successfully");
             router.refresh();
         } catch (error) {
@@ -50,7 +50,7 @@ export default function UploadPage() {
             return;
         }
 
-        await handleUpload(videoFile, title, description);
+        await handleUpload(videoFile, thumbnailFile, title, description);
     }
 
     return (

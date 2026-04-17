@@ -3,6 +3,7 @@ import { functions } from './firebase';
 
 const generateUploadUrl = httpsCallable(functions, 'generateUploadUrl');
 const getVideosFunction = httpsCallable(functions, 'getVideos');
+const getThumbnailsFunction = httpsCallable(functions, 'getThumbnails');
 
 export interface Video {
     id?: string,
@@ -13,15 +14,16 @@ export interface Video {
     description?: string  
   }
 
-async function uploadFileWithSignedUrl(videofile: File, title: string, description: string) {
+async function uploadFileWithSignedUrl(videofile: File, thumbnailFile: File, title: string, description: string) {
     const response: any = await generateUploadUrl({
         fileExtension: videofile.name.split('.').pop(),
+        thumbnailFileExtension: thumbnailFile.name.split('.').pop(),
         title: title,
         description: description,
     });
 
     // Upload the file via the signed url 
-    const uploadResult = await fetch(response?.data?.url, {
+    const uploadVideoResult = await fetch(response?.data?.url, {
         method: 'PUT',
         body: videofile,
         headers: {
@@ -29,28 +31,32 @@ async function uploadFileWithSignedUrl(videofile: File, title: string, descripti
         },
     });
 
-    if (!uploadResult.ok) {
-        throw new Error(`Failed to upload file: ${videofile.name}. Status code: ${uploadResult.status}`);
+    if (!uploadVideoResult.ok) {
+        throw new Error(`Failed to upload file: ${videofile.name}. Status code: ${uploadVideoResult.status}`);
     }
 
-    return uploadResult;
+
+    // Upload the thumbnail file via the signed url 
+    const uploadThumbnailResult = await fetch(response?.data?.thumbnailUrl, {
+        method: 'PUT',
+        body: thumbnailFile,
+        headers: {
+            'Content-Type': thumbnailFile.type,
+        },
+    });
+
+    if (!uploadThumbnailResult.ok) {
+        throw new Error(`Failed to upload file: ${thumbnailFile.name}. Status code: ${uploadThumbnailResult.status}`);
+    }
 }
 
-export async function uploadVideo(videoFile: File, title: string, description: string) {
+export async function uploadVideo(videoFile: File, thumbnailFile: File, title: string, description: string) {
     try {
-        return uploadFileWithSignedUrl(videoFile, title, description);
+        return uploadFileWithSignedUrl(videoFile, thumbnailFile, title, description);
     } catch (error) {
         throw new Error(`Failed to upload video: ${error}`);
     }
 }
-
-// export async function uploadThumbnail(file: File) {
-//     try {
-//         return uploadFileWithSignedUrl(file);
-//     } catch (error) {
-//         throw new Error(`Failed to upload thumbnail: ${error}`);
-//     }
-// }
 
 export async function getVideos() {
   const response: any = await getVideosFunction();
