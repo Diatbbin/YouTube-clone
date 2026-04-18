@@ -1,4 +1,5 @@
-# YouTube Clone
+# Video upload & streaming platform
+
 
 A full-stack video upload and playback demo: users sign in with Google, upload raw video and a thumbnail, a background worker transcodes with FFmpeg, and the app lists videos and streams the processed file from Google Cloud Storage.
 
@@ -14,7 +15,7 @@ Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for auth,
 
 ## Video playback page
 
-<img width="1466" height="823" alt="Screenshot 2026-04-18 at 7 21 53 PM" src="https://github.com/user-attachments/assets/6d86e1cc-27bb-4183-a680-e26404bb2fe6" />
+<img width="1888" height="944" alt="Screenshot_37" src="https://github.com/user-attachments/assets/939c5ba7-bb90-4f73-8027-a81dc6a9077c" />
 
 ## Upload page
 
