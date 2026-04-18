@@ -1,4 +1,4 @@
-# Video upload & streaming platform
+# Video upload & playback platform
 
 
 A full-stack video upload and playback demo: users sign in with Google, upload raw video and a thumbnail, a background worker transcodes with FFmpeg, and the app lists videos and streams the processed file from Google Cloud Storage.
