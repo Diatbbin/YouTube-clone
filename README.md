@@ -26,7 +26,7 @@ Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for auth,
 ## Features
 
 - **Browse** uploaded videos (metadata, thumbnails, processing status)
-- **Watch** transcoded video in the browser
+- **Watch** transcoded video (360p) in the browser
 - **Sign in / sign out** with Google (Firebase Auth)
 - **Upload** video and thumbnail (authenticated users only; direct upload to GCS via signed URLs)
 - **Background processing** — raw uploads are transcoded (e.g. 360p) via an Express service triggered through Pub/Sub
