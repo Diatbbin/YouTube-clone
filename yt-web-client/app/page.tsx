@@ -1,14 +1,9 @@
 import styles from './page.module.css';
-import { getVideos } from './firebase/function';
-
-import Image from "next/image";
-import Link from "next/link";
+import VideoList from './video-list';
 
 export const dynamic = "force-dynamic";
-const thumbnailPrefix = "https://storage.googleapis.com/thumbnails-db/"
 
 export default async function Home() {
-    const videos = await getVideos();
 
     return (
         <main className={styles.page}>
@@ -19,44 +14,9 @@ export default async function Home() {
                 </p>
             </section>
           
-            <section className={styles.contentSection}>
-                <div className={styles.contentHeader}>
-                    <h2 className={styles.contentTitle}>All videos</h2>
-                    <span className={styles.videoCount}>{videos.length} videos</span>
-                </div>
-
-                {videos.length > 0 && (
-                    <div className={styles.videoList}>
-                        {videos.map((video) => (
-                            <Link
-                                key={video.id}
-                                href={`/watch?${new URLSearchParams({
-                                    v: video.filename ?? '',
-                                    title: video.title ?? '',
-                                    description: video.description ?? '',
-                                }).toString()}`}
-                                className={styles.videoCard}
-                            >
-                                <Image
-                                    src={thumbnailPrefix + video.thumbnailFilename}
-                                    alt={video.title ?? 'video thumbnail'}
-                                    width={200}
-                                    height={120}
-                                    className={styles.thumbnail}
-                                />
-
-                                <div className={styles.videoMetadata}>
-                                    <h3 className={styles.videoTitle}>{video.title}</h3>
-                                    <p className={styles.description}>{video.description}</p>
-                                    <span className={styles.status}>{video.status ?? 'processing'}</span>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
-                )}
-            </section>   
+          
+            <VideoList />
         </main>
     )
 }
-
 export const revalidate = 30;
