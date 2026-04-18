@@ -12,6 +12,15 @@ export default function UploadPage() {
     const [videoFile, setVideoFile] = useState<File | null>(null);
     const [description, setDescription] = useState("")
     const [isUploading, setIsUploading] = useState(false);
+    const [fileInputsKey, setFileInputsKey] = useState(0);
+
+    const resetForm = () => {
+        setTitle("");
+        setDescription("");
+        setThumbnailFile(null);
+        setVideoFile(null);
+        setFileInputsKey((k) => k + 1);
+    };
 
     const handleUpload = async (videoFile: File, thumbnailFile: File, title: string, description: string) => {
         setIsUploading(true);
@@ -19,6 +28,7 @@ export default function UploadPage() {
         try {
             await uploadVideo(videoFile,thumbnailFile, title, description);
             alert("File uploaded successfully");
+            resetForm();
             router.refresh();
         } catch (error) {
             alert(`Failed to upload file: ${error}`);
@@ -84,6 +94,7 @@ export default function UploadPage() {
                 <label className={styles.label}>
                     Thumbnail image
                     <input 
+                        key={`thumbnail-${fileInputsKey}`}
                         className={styles.input}
                         type="file"
                         accept="image/*"
@@ -100,6 +111,7 @@ export default function UploadPage() {
                 <label className={styles.label}>
                     Video file
                     <input 
+                        key={`video-${fileInputsKey}`}
                         className={styles.input}
                         type="file"
                         accept=".mov, video/quicktime, video/*"
