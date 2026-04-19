@@ -45,6 +45,12 @@
     font-size: 14px;
 }
 
+.listLoading,
+.listEmpty {
+    color: #666666;
+    font-size: 14px;
+}
+
 .videoList {
     display: flex;
     flex-direction: column;

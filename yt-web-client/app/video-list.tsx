@@ -11,28 +11,46 @@ const thumbnailPrefix = `https://storage.googleapis.com/${THUMBNAIL_BUCKET}/`
 
 export default function VideoList() {
     const [videos, setVideos] = useState<Video[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        let cancelled = false;
+
         const fetchVideos = async () => {
           try {
             const data = await getVideos();
-            setVideos(data);
+            if (!cancelled) setVideos(data);
           } catch (e: any) {
             console.error(e.message);
+          } finally {
+            if (!cancelled) setLoading(false);
           }
         };
-      
+
         fetchVideos();
+        return () => {
+          cancelled = true;
+        };
       }, []);
 
     return (
         <section className={styles.contentSection}>
             <div className={styles.contentHeader}>
                 <h2 className={styles.contentTitle}>All videos</h2>
-                <span className={styles.videoCount}>{videos.length} videos</span>
+                <span className={styles.videoCount}>
+                    {loading ? "" : `${videos.length} videos`}
+                </span>
             </div>
 
-            {videos.length > 0 && (
+            {loading && (
+                <p className={styles.listLoading}>Loading videos…</p>
+            )}
+
+            {!loading && videos.length === 0 && (
+                <p className={styles.listEmpty}>No videos yet.</p>
+            )}
+
+            {!loading && videos.length > 0 && (
                 <div className={styles.videoList}>
                     {videos.map((video) => (
                         <Link
