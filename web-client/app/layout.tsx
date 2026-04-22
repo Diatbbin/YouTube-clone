@@ -5,8 +5,8 @@ import Navbar from './navbar/navbar'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Youtube',
-  description: 'Youtube Clone',
+  title: 'Video Platform',
+  description: 'Video Platform',
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {

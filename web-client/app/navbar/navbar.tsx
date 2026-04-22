@@ -24,8 +24,8 @@ export default function Navbar() {
     return (
         <nav className={Styles.nav}>
             <Link href="/">
-                <Image width={90} height={20}
-                    src="/youtube-logo.svg" alt="Youtube logo" />
+                <Image width={60} height={60}
+                    src="/logo.svg" alt="Platform logo" />
             </Link>
             {
                 user && <Upload />
