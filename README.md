@@ -11,7 +11,7 @@ Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for auth,
 
 ## Home page
 
-<img width="1469" height="831" alt="Screenshot 2026-04-18 at 7 20 33 PM" src="https://github.com/user-attachments/assets/1f1ac3e3-5c19-4dc6-a484-066e1119c954" />
+<img width="1466" height="826" alt="Screenshot 2026-04-22 at 11 53 00 PM" src="https://github.com/user-attachments/assets/6a71cffc-b4fa-47c8-97c9-4410c205faed" />
 
 ## Video playback page
 
@@ -19,7 +19,7 @@ Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for auth,
 
 ## Upload page
 
-<img width="1466" height="823" alt="Screenshot 2026-04-18 at 7 21 53 PM" src="https://github.com/user-attachments/assets/6d86e1cc-27bb-4183-a680-e26404bb2fe6" />
+<img width="1469" height="830" alt="Screenshot 2026-04-22 at 11 53 13 PM" src="https://github.com/user-attachments/assets/add0d4b9-c7eb-4e3c-9056-6df71e104048" />
 
 ---
 
