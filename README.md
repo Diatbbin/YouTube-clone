@@ -3,7 +3,7 @@
 
 A full-stack video upload and playback demo: users sign in with Google, upload raw video and a thumbnail, a background worker transcodes with FFmpeg, and the app lists videos and streams the processed file from Google Cloud Storage.
 
-**Live site:** [yt-web-client on Cloud Run](https://yt-web-client-296066166592.us-central1.run.app)
+**Live site:** [web-client on Cloud Run](https://yt-web-client-296066166592.us-central1.run.app)
 
 Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for auth, Firestore, and Cloud Functions.
 
@@ -15,7 +15,7 @@ Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for auth,
 
 ## Video playback page
 
-<img width="1888" height="944" alt="Screenshot_37" src="https://github.com/user-attachments/assets/939c5ba7-bb90-4f73-8027-a81dc6a9077c" />
+<img width="1892" height="949" alt="Screenshot_6" src="https://github.com/user-attachments/assets/d7d191d0-8115-4d27-90d3-29ef73118e24" />
 
 ## Upload page
 
