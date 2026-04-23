@@ -49,8 +49,8 @@ Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for auth,
 
 | Path | Description |
 |------|-------------|
-| `yt-web-client/` | Next.js web app |
-| `yt-api-service/` | Firebase Cloud Functions |
+| `web-client/` | Next.js web app |
+| `api-service/` | Firebase Cloud Functions |
 | `src/` | Express transcoding service (Pub/Sub → FFmpeg → GCS) |
 | `shared/` | Shared TypeScript types (e.g. `Video`) |
 
