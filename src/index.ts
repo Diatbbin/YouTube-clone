@@ -22,7 +22,7 @@ app.post('/process-video', async (req, res) => {
         }
     } catch (error) {
         console.error(error)
-        res.status(400).send('Bad request: missing filename')
+        res.status(400).send('Bad request: invalid payload received')
         return 
     }
 
