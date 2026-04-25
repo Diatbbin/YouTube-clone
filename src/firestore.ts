@@ -7,7 +7,7 @@ initializeApp({credential: credential.applicationDefault()});
 
 const firestore = new Firestore();
 const videoCollectionId = 'videos';
-const MAX_RETRY_COUNT = 3;
+const MAX_RETRY_COUNT = 5;
 const processingTimeout = 60 * 60 * 1000; // 1hr
 
 export function setVideo(videoId: string, video: Video) {
