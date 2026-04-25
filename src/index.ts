@@ -30,40 +30,48 @@ app.post('/process-video', async (req, res) => {
     const outputFileName = `processed-${inputFileName}`;
     const videoId = inputFileName.split('.')[0];
 
-    if (!await isVideoNew(videoId)) {
-        res.status(400).send('Bad request: video already processing or processed');
+    console.log("Received Pub/Sub payload:", data);
+    console.log("Input file:", inputFileName);
+    console.log("Video ID:", videoId);
+
+    const isNew = await isVideoNew(videoId);
+
+    console.log("isVideoNew result:", isNew);
+
+    if (!isNew) {
+        res.status(200).send('Video already processing, processed or retry limit reached');
         return 
-    } else {
-        await setVideo(videoId, {
-            id: videoId,
-            uid: videoId.split("-")[0],
-            status: "processing"
-        })
-    }
+    } 
 
-    await setUpDirectories();
-    
-    // Download raw vid from cloud storage
-    await downloadRawVideo(inputFileName)
-
-    // Process the vid into 360p
     try {
+        await setUpDirectories();
+        await downloadRawVideo(inputFileName)
         await convertVideo(inputFileName, outputFileName)
+        await uploadProcessedVideo(outputFileName)
     } catch (err) {
         await Promise.all([
             deleteRawVideo(inputFileName),
             deleteProcessedVideo(outputFileName)
         ])
+
+        console.log("Setting failed status");
+
+        await setVideo(videoId, {
+            status: "failed",
+            lastStatusUpdateTime: Date.now(),
+            error: err instanceof Error ? err.message : String(err)
+        })
+
+        console.log("Failed status set");
+
         res.status(500).send('Processing failed')
         return 
     }
 
-    // Uplaod the processed video to cloud storage
-    await uploadProcessedVideo(outputFileName)
-
     await setVideo(videoId, {
         status: "processed",
-        filename: outputFileName
+        filename: outputFileName,
+        lastStatusUpdateTime: Date.now(),
     })
 
     await Promise.all([
@@ -72,9 +80,9 @@ app.post('/process-video', async (req, res) => {
     ])
 
     res.status(200).send('Processing finished successfully')
-});
+})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+  console.log(`Server running at http://localhost:${port}`)
+})

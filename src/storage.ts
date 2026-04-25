@@ -7,7 +7,7 @@ const storage = new Storage();
 const rawVideoBucketName = "raw-videos-db"
 const processedVideoBucketName = "processed-videos-db"
 
-const localRawVideoPath = "./raw-vdeos-db"
+const localRawVideoPath = "./raw-videos-db"
 const localProcessedVideoPath = "./processed-videos-db"
 
 /**
