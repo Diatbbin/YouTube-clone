@@ -30,13 +30,7 @@ app.post('/process-video', async (req, res) => {
     const outputFileName = `processed-${inputFileName}`;
     const videoId = inputFileName.split('.')[0];
 
-    console.log("Received Pub/Sub payload:", data);
-    console.log("Input file:", inputFileName);
-    console.log("Video ID:", videoId);
-
     const isNew = await isVideoNew(videoId);
-
-    console.log("isVideoNew result:", isNew);
 
     if (!isNew) {
         res.status(200).send('Video already processing, processed or retry limit reached');
@@ -54,15 +48,11 @@ app.post('/process-video', async (req, res) => {
             deleteProcessedVideo(outputFileName)
         ])
 
-        console.log("Setting failed status");
-
         await setVideo(videoId, {
             status: "failed",
             lastStatusUpdateTime: Date.now(),
             error: err instanceof Error ? err.message : String(err)
         })
-
-        console.log("Failed status set");
 
         res.status(500).send('Processing failed')
         return 
