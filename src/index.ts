@@ -5,7 +5,8 @@ import {
     setUpDirectories, 
     deleteRawVideo,
     deleteProcessedVideo, 
-    uploadProcessedVideo
+    uploadProcessedVideo,
+    deleteRawVideoFromBucket
 } from './storage';
 import { isVideoNew, setVideo } from './firestore';
 
@@ -63,6 +64,8 @@ app.post('/process-video', async (req, res) => {
         filename: outputFileName,
         lastStatusUpdateTime: Date.now(),
     })
+
+    await deleteRawVideoFromBucket(inputFileName);
 
     await Promise.all([
         deleteRawVideo(inputFileName),

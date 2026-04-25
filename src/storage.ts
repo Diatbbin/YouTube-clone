@@ -109,6 +109,12 @@ export function deleteRawVideo(filename: string) {
     return deleteFile(`${localRawVideoPath}/${filename}`)
 }
 
+export async function deleteRawVideoFromBucket(filename: string) {
+    await storage.bucket(rawVideoBucketName)
+        .file(filename)
+        .delete() 
+}
+
 /**
  * 
  * @param filePath  - The path of the file to be deleted
