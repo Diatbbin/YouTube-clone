@@ -60,14 +60,14 @@ export const generateUploadUrl = onCall({maxInstances: 1}, async (request) => {
   const [url] = await videoBucket.file(fileName).getSignedUrl({
     version: "v4",
     action: "write",
-    expires: Date.now() + 15 * 60 * 1000,
+    expires: Date.now() + 60 * 1000,
   });
 
   const [thumbnailUrl] =
     await thumbnailBucket.file(thumbnailFileName).getSignedUrl({
       version: "v4",
       action: "write",
-      expires: Date.now() + 15 * 60 * 1000,
+      expires: Date.now() + 60 * 1000,
     });
 
   return {url, fileName, thumbnailUrl};
