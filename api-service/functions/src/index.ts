@@ -79,11 +79,11 @@ export const getVideos = onCall({maxInstances: 1}, async () => {
       .collection(videoCollectionId)
       .where("status", "==", "processed")
       .limit(10)
-      .get()
+      .get();
 
   return snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
-  })) as Video[]
+  })) as Video[];
 });
 
