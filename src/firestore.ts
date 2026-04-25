@@ -15,7 +15,7 @@ async function getVideo(videoId: string) {
 }
 
 export function setVideo(videoId: string, video: Video) {
-    firestore
+    return firestore
         .collection(videoCollectionId)
         .doc(videoId)
         .set(video, { merge: true })
