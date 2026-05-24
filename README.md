@@ -1,11 +1,11 @@
 # Video upload & playback platform
 
 
-A full-stack video upload and playback demo: users sign in with Google, upload raw video and a thumbnail, a background worker transcodes with FFmpeg, and the app lists videos and streams the processed file from Google Cloud Storage.
+A full-stack video upload and playback demo: users sign in with Google, upload raw video and a thumbnail, a background worker transcodes the video with FFmpeg, and the app lists videos and users can watch the processed video from Google Cloud Storage
 
 **Live site:** [web-client on Cloud Run](https://yt-web-client-296066166592.us-central1.run.app)
 
-Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for auth, Firestore, and Cloud Functions.
+Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for Auth, Firestore, and Cloud Functions
 
 ---
 
@@ -25,23 +25,11 @@ Hosted on **Google Cloud** (Cloud Run, GCS, Pub/Sub) with **Firebase** for auth,
 
 ## Features
 
-- **Browse** uploaded videos (metadata, thumbnails, processing status)
+- **Browse** uploaded videos (metadata, thumbnails)
 - **Watch** transcoded video (360p) in the browser
 - **Sign in / sign out** with Google (Firebase Auth)
 - **Upload** video and thumbnail (authenticated users only, direct upload to GCS via signed URLs)
 - **Background processing** — raw uploads are transcoded (360p) via an Express service triggered through Pub/Sub
-
----
-
-## Tech stack
-
-| Area | Technologies |
-|------|----------------|
-| **Frontend** | TypeScript, Next.js (App Router) |
-| **Video processing** | Node.js, Express.js, FFmpeg, Docker |
-| **Auth & APIs** | Firebase Authentication, Firebase Cloud Functions (callable) |
-| **Data** | Cloud Firestore, Google Cloud Storage |
-| **Messaging & hosting** | Google Cloud Pub/Sub, Google Cloud Run |
 
 ---
 
